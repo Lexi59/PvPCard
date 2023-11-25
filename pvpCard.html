@@ -29,25 +29,25 @@
 </style>
 </head>
 <body>
-<svg xmlns="http://www.w3.org/2000/svg" width ="250" height="350" id="PokeCard">
-	<rect width="250" height = "350" id="PokemonColor" style="fill:rgb(255,255,255);stroke-width: 50;stroke:#D7CD90;"/>
-	<rect x="-20" y="0" rx="20" ry="20" width="150" height="25" fill="black" />
-	<text fill="white" style = "fontSize='18'" font-family="Verdana" x="5" y="21" id = "PokemonName">Carbink</text>
-	<image id="photoOutput" href="carbinkPoGo.png" height="130px" width="130px" x = "60" y = "25"/>
-	<text fill = "black" font-size = "12" font-family="Verdana" x = "125" y = "170" text-anchor = "middle" id= 'fastMove'>Rock Throw</text>
-	
-	<rect x="35" y="185" rx="5" ry="5" width="180" height="25" opacity = "0.7" fill="#D7CD90" id = "chargeMove1Rect" style = "display: block;"/>
-	<text fill = "black" font-size = "12" font-family="Verdana" x = "40" y = "200" id = "chargeMove1" style = "display: block;" xml:space = "preserve">Rock Slide             9-9-9-9</text>
-	
-	<rect x="35" y="220" rx="5" ry="5" width="180" height="25" opacity = "0.7" fill="#F6A7E8" id = "chargeMove2Rect" style = "display: block;"/>
-	<text fill = "black" font-size = "12" font-family="Verdana" x = "40" y = "235" id = "chargeMove2" style = "display: block;"xml:space = "preserve">Moonblast        12-12-12-12</text>
-	
-	<rect x="35" y="255" rx="5" ry="5" width="180" height="25" opacity = "0.7" fill="#D7CD90" id= "chargeMove3Rect" style = "display: block;"/>
-	<text fill = "black" font-size = "12" font-family="Verdana" x = "40" y = "270" id = "chargeMove3" style = "display: block;"xml:space = "preserve">Power Gem      12-12-12-12</text>
+	<svg xmlns="http://www.w3.org/2000/svg" width ="250" height="350" id="PokeCard">
+		<rect width="250" height = "350" id="PokemonColor" style="fill:rgb(255,255,255);stroke-width: 50;stroke:#D7CD90;"/>
+		<rect x="-20" y="0" rx="20" ry="20" width="150" height="25" fill="black" />
+		<text fill="white" style = "fontSize='18'" font-family="Verdana" x="5" y="21" id = "PokemonName">Carbink</text>
+		<image id="photoOutput" href = "https://img.pokemondb.net/artwork/avif/carbink.avif" height="130px" width="130px" x = "60" y = "25"/>
+		<text fill = "black" font-size = "12" font-family="Verdana" x = "125" y = "170" text-anchor = "middle" id= 'fastMove'>Rock Throw</text>
 		
-	<rect x="35" y="290" rx="5" ry="5" width="180" height="25" opacity = "0.7" fill="#D7CD90" id= "chargeMove4Rect" style = "display: block;"/>
-	<text fill = "black" font-size = "12" font-family="Verdana" x = "40" y = "305" id = "chargeMove4" style = "display: block;"xml:space = "preserve">Power Gem      12-12-12-12</text>
-</svg>
+		<rect x="35" y="185" rx="5" ry="5" width="180" height="25" opacity = "0.7" fill="#D7CD90" id = "chargeMove1Rect" style = "display: block;"/>
+		<text fill = "black" font-size = "12" font-family="Verdana" x = "40" y = "200" id = "chargeMove1" style = "display: block;" xml:space = "preserve">Rock Slide             9-9-9-9</text>
+		
+		<rect x="35" y="220" rx="5" ry="5" width="180" height="25" opacity = "0.7" fill="#F6A7E8" id = "chargeMove2Rect" style = "display: block;"/>
+		<text fill = "black" font-size = "12" font-family="Verdana" x = "40" y = "235" id = "chargeMove2" style = "display: block;"xml:space = "preserve">Moonblast        12-12-12-12</text>
+		
+		<rect x="35" y="255" rx="5" ry="5" width="180" height="25" opacity = "0.7" fill="#D7CD90" id= "chargeMove3Rect" style = "display: block;"/>
+		<text fill = "black" font-size = "12" font-family="Verdana" x = "40" y = "270" id = "chargeMove3" style = "display: block;"xml:space = "preserve">Power Gem      12-12-12-12</text>
+			
+		<rect x="35" y="290" rx="5" ry="5" width="180" height="25" opacity = "0.7" fill="#D7CD90" id= "chargeMove4Rect" style = "display: block;"/>
+		<text fill = "black" font-size = "12" font-family="Verdana" x = "40" y = "305" id = "chargeMove4" style = "display: block;"xml:space = "preserve">Power Gem      12-12-12-12</text>
+	</svg>
 </body>
 <form id = "cardInfoForm" >
 	<button id ="fontDecrease" onclick = "fontChange('-');">-</button>
@@ -74,7 +74,7 @@
 		<option value="dark">Dark</option>
 		<option value="fairy">Fairy</option>
 	</select><br>
-	<input id="photo" width = "150" placeholder = "Image URL" onfocusout = "updatePhoto();"/>
+	<input type = "file" accept = "image/png", "image/jpeg" id="photo" width = "150"/>
 	<br>
 	<input id="fastMoveInput" width = "150" placeholder="Fast Move Name" onfocusout = "updateName('fastMoveInput','fastMove');"></input>
 	<br>
@@ -172,6 +172,7 @@
 	<br>
 	<button style = "width: 20%; margin: 0% 30%;" id="downloadSVG" onclick = "saveSvg();"><b>Download</b></button>
 </form>
+<div id="png-container"></div>
 <script>
 var hexColors = {
 	normal: "#A3A49E",
@@ -194,7 +195,7 @@ var hexColors = {
 	fairy: "#F6A7E8" 
 };
 
-function saveSvg(svgEl, name) {
+function saveSvg() {
 	svgEl = document.querySelector('svg');
 	name = document.getElementById('pokemonNameInput').value;
     svgEl.setAttribute("xmlns", "http://www.w3.org/2000/svg");
@@ -208,6 +209,18 @@ function saveSvg(svgEl, name) {
     document.body.appendChild(downloadLink);
     downloadLink.click();
     document.body.removeChild(downloadLink);
+} 
+function triggerDownload(imgURI) {
+  const a = document.createElement('a');
+  a.download = 'MY_COOL_IMAGE.png'; // filename
+  a.target = '_blank';
+  a.href = imgURI;
+
+  a.dispatchEvent(new MouseEvent('click', {
+    view: window,
+    bubbles: false,
+    cancelable: true
+  }));
 }
 
 function updateName(idOfForm, idOfOutput)
@@ -244,10 +257,7 @@ function toggleChargeMove(ids, btnId)
 	btn = document.getElementById(btnId);
 	for (var id in ids)
 	{
-		console.log(ids[id]);
-		console.log(btn);
 		rect = document.getElementById(ids[id]);
-		console.log(rect);
 
 		if(rect.style.display =="block")
 		{
@@ -261,11 +271,16 @@ function toggleChargeMove(ids, btnId)
 		}
 	}
 }
-function updatePhoto()
-{
-	var output = document.getElementById('photoOutput')
-	output.href.baseVal = document.getElementById('photo').value;
 
+document.getElementById('photo').onchange = () => {
+	var output = document.getElementById('photoOutput')
+	file = (document.getElementById('photo')).files[0];
+	var reader = new FileReader();
+	reader.onload = function() {
+		var base64 = reader.result;
+		output.href.baseVal = base64;
+	};
+	reader.readAsDataURL(file);
 }
 document.getElementById('cardInfoForm').addEventListener('keypress', function(event) {
   if (event.keyCode === 13) {
